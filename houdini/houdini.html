@@ -1,0 +1,26 @@
+<html>
+    <!-- <script>CSS.paintWorklet.addModule('csscomponent.js');</script> -->
+    <style>
+        @property --direction {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        .card {
+            --direction: 0deg;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(var(--direction), #5ddcff, #3c6, 40%, #4e4e4e);
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                --direction: 360deg;
+                background: linear-gradient(var(--direction), #5ddcff, #3c6, 40%, #4e4e4e);
+            }
+        }
+    </style>    
+    <body>
+        <div class="card"></div>
+    </body>
+</html>
