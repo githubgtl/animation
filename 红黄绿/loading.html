@@ -1,0 +1,50 @@
+<html>
+    <style>
+        .yellow {
+            background-color: yellow;
+        }
+        .red {
+            background-color: red;
+        }
+        .green {
+            background-color: green;
+        }
+        .animation {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: solid 1px;
+        }
+        .container {
+            display:  flex;
+            justify-content: center;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <div class="animation"></div>
+            <div class="animation"></div>
+            <div class="animation"></div>
+            <div class="time">90</div>
+        </div>
+    </body>
+    <script type="module">
+        import {TraficLights} from './traficLights.js'
+
+        const configs = [{color: 'red', last: 1000}, {color: 'yellow', last: 2000}, {color: 'green', last: 3000}]
+
+        const light = new TraficLights(configs)
+        let lastIndex = -1
+        function getColor(){
+            const colorObj = light.getTraficLight()
+            const ele = document.querySelectorAll('.animation')[colorObj.index]
+            const time = document.querySelector('.time')
+            ele.className = `animation ${colorObj.color}`
+            document.querySelectorAll('.animation')[colorObj.index === 0 ?configs.length -1: colorObj.index-1].className = `animation`
+            time.textContent = Math.ceil(colorObj.remainTime / 1000)
+            requestAnimationFrame(getColor)
+        }
+        getColor()
+
+    </script>
+</html>
