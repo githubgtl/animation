@@ -1,0 +1,25 @@
+<html>
+    <style>
+        .container{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: red;
+        }
+    </style>
+    <body>
+        <div class="container"></div>
+    
+    </body>
+    <script>
+        const box = document.querySelector('.container')
+        window.addEventListener('click', (e)=>{move(e.clientX, e.clientY)})
+        function move(x, y) {
+            const ract = box.getBoundingClientRect()
+            const BoxX =  ract.left
+            const BoxY =  ract.top
+            box.getAnimations().forEach(item=>item.cancel())
+            box.animate([{transform: `translate(${BoxX}px, ${BoxY}px)`}, {transform: `translate(${x - ract.width / 2}px, ${y-ract.height / 2}px)`}], {duration: 2000, fill: 'forwards'})
+        }
+    </script>
+</html>
